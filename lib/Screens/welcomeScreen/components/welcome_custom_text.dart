@@ -6,7 +6,8 @@ class CustomWelcomeText extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 10),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+        },
         child: Text(
           "Forgot Password ?",
           style: TextStyle(

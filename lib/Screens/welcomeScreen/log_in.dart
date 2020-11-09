@@ -7,7 +7,11 @@ import 'package:mytodoapp/Screens/welcomeScreen/components/welcome_login_google.
 import 'package:mytodoapp/Screens/welcomeScreen/components/welcone_custom_buttons.dart';
 import 'package:mytodoapp/Screens/welcomeScreen/register.dart';
 
-class LogIn extends StatelessWidget {
+class LogIn extends StatefulWidget{
+  @override
+  LoginPageState createState() => LoginPageState();
+}
+class LoginPageState extends State<LogIn> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,11 +31,45 @@ class LogIn extends StatelessWidget {
                       TextInputType.visiblePassword, 300, true),
                   CustomWelcomeText(),
                   SizedBox(height: 25),
-                  CustomButtons('Sign-In', MainDashboard()),
+                  CustomButtons('Sign-In', MainDashboard(), ),
                   CustomButtons('Create Account', RegisterScreen()),
-                  CustomSignInGoogle(),
+                  _googleSignInButton(),
                 ],
               )),
             )));
+  }
+  Widget _signInButton(){
+
+  }
+  Widget _googleSignInButton() {
+    return FlatButton(
+      onPressed: () {
+        signInWithGoogle().whenComplete(() {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return MainDashboard();
+              },
+            ),
+         );
+        });
+      },
+      minWidth: 300,
+      height: 80,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+              margin: const EdgeInsets.only(right: 5),
+              constraints: BoxConstraints(maxHeight: 40),
+              child: Image.asset('assests/Images/google_logo.png',
+                  fit: BoxFit.cover)),
+          Text(
+            'Sign-in with Google',
+            style: TextStyle(color: Colors.teal, fontSize: 15),
+          )
+        ],
+      ),
+    );
   }
 }
